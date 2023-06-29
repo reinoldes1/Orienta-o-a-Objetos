@@ -12,11 +12,16 @@ class Conta:
     def deposito(self, valor):
         self.__saldo += valor
     
+    def verifica_saque(self, valor_a_sacar):
+        valor_disponivel = self.__saldo + self.__limite
+        return valor_a_sacar <= (valor_disponivel)
+
     def saque(self, valor):
-        if (valor <= (self.__saldo +self.__limite)):
+        if (self.verifica_saque(valor)):
             self.__saldo -= valor
         else:
-            print("O valor {} passou do limite de sua conta".format(valor))
+            soma = valor - (self.__saldo + self.__limite)
+            print("O valor R${} está R${} acima do limite (R${}) da sua conta".format(valor, soma, (self.__limite + self.__saldo)))
 
     def transferencia(self, valor, destino):
         self.saque(valor)
