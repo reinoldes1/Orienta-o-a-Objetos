@@ -12,12 +12,12 @@ class Conta:
     def deposito(self, valor):
         self.__saldo += valor
     
-    def verifica_saque(self, valor_a_sacar):
+    def __verifica_saque(self, valor_a_sacar):
         valor_disponivel = self.__saldo + self.__limite
         return valor_a_sacar <= (valor_disponivel)
 
     def saque(self, valor):
-        if (self.verifica_saque(valor)):
+        if (self.__verifica_saque(valor)):
             self.__saldo -= valor
         else:
             soma = valor - (self.__saldo + self.__limite)
@@ -46,3 +46,11 @@ class Conta:
     @limite.setter
     def limite(self, limite):
         self.__limite = limite
+
+    @staticmethod
+    def codigo_banco():
+        return "001"
+    
+    @staticmethod
+    def codigos_bancos_externos():
+        return {'BB':'001', 'Caixa':"104", "Bradesco":'237', 'Itau':'341'}
